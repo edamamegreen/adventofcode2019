@@ -1,6 +1,18 @@
 
 const fuel = function(m) { return Math.round(m / 3 - ((m / 3) % 1)) - 2; };
 
+const fuelrecur = function(mass) {
+    const fuel = function(m) {return Math.round(m / 3 - ((m / 3) % 1)) - 2;}
+    let f = fuel(mass);
+    let total = mass + f;
+    while (fuel(f) > 0) {
+        console.log(total);
+        f = fuel(f);
+        total = total + f;
+    }
+    return total;
+};
+
 let list;
 // fetch isn't working for me, I got a cors message but changing the mode to no-cors didn't help
 // so I wonder if advent of code isn't letting me fetch from localhost for some reason
