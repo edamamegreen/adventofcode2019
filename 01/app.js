@@ -1,5 +1,5 @@
 
-const mass = function(m) { return Math.round(m / 3 - ((m / 3) % 1)) - 2; };
+const fuel = function(m) { return Math.round(m / 3 - ((m / 3) % 1)) - 2; };
 
 let list;
 // fetch isn't working for me, I got a cors message but changing the mode to no-cors didn't help
@@ -130,4 +130,4 @@ const data = "51753\n" +
     "106078\n" +
     "71447";
 
-data.split(String.fromCharCode(10)).reduce((acc, curr) => acc + mass(Number(curr)), 0); //3373568
+data.split(String.fromCharCode(10)).reduce((acc, curr) => acc + fuel(Number(curr)), 0); //3373568
