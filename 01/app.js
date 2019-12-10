@@ -1,19 +1,19 @@
 
 const fuel = function(m) { return Math.round(m / 3 - ((m / 3) % 1)) - 2; };
 
-const fuelrecur = function(mass) {
+const fuelRecur = function(mass) {
     const fuel = function(m) {return Math.round(m / 3 - ((m / 3) % 1)) - 2;}
     let f = fuel(mass);
-    let total = mass + f;
+    let total = f;
     while (fuel(f) > 0) {
-        console.log(total);
+        console.log(f);
         f = fuel(f);
         total = total + f;
     }
     return total;
 };
 
-let list;
+// let list;
 // fetch isn't working for me, I got a cors message but changing the mode to no-cors didn't help
 // so I wonder if advent of code isn't letting me fetch from localhost for some reason
 // fetch(
@@ -142,4 +142,6 @@ const data = "51753\n" +
     "106078\n" +
     "71447";
 
-data.split(String.fromCharCode(10)).reduce((acc, curr) => acc + fuel(Number(curr)), 0); //3373568
+let totalMass = data.split(String.fromCharCode(10)).reduce((acc, curr) => acc + fuel(Number(curr)), 0); //3373568
+let totalFuel = data.split(String.fromCharCode(10)).reduce((acc, curr) => acc + fuelRecur(Number(curr)), 0); //5057481
+console.log("Total mass is: " + totalMass + ", and total fuel is: " + totalFuel);
