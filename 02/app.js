@@ -10,14 +10,14 @@ const evalOpCodes = function (opcodes, idx = 0) {
         case 1:
             let a = opcodes[idx + 1];
             let b = opcodes[idx + 2];
-            opcodes[opcodes[idx + 3]] = a + b;
+            opcodes[opcodes[idx + 3]] = opcodes[a] + opcodes[b];
             console.log(opcodes);
             evalOpCodes(opcodes, idx + 4);
             break;
         case 2:
             let c = opcodes[idx + 1];
             let d = opcodes[idx + 2];
-            opcodes[opcodes[idx + 3]] = c * d;
+            opcodes[opcodes[idx + 3]] = opcodes[c] * opcodes[d];
             console.log(opcodes);
             evalOpCodes(opcodes, idx + 4);
             break;
