@@ -14,14 +14,12 @@ const evalOpCodes = function (opcodes, idx = 0) {
             let a = opcodes[idx + 1];
             let b = opcodes[idx + 2];
             opcodes[opcodes[idx + 3]] = opcodes[a] + opcodes[b];
-            console.log(opcodes);
             evalOpCodes(opcodes, idx + 4);
             break;
         case 2:
             let c = opcodes[idx + 1];
             let d = opcodes[idx + 2];
             opcodes[opcodes[idx + 3]] = opcodes[c] * opcodes[d];
-            console.log(opcodes);
             evalOpCodes(opcodes, idx + 4);
             break;
         case 99:
@@ -30,6 +28,32 @@ const evalOpCodes = function (opcodes, idx = 0) {
         default:
             console.log("There's something wrong - unidentified opcode: " + opcodes[idx]);
     }
+    return opcodes;
 }
 
-evalOpCodes(puzzleInput); // 3654868
+// evalOpCodes(puzzleInput); // 3654868
+
+const findOutput = function (target, opcodes) {
+    let vals;
+    let input = opcodes.slice();
+    console.log(input);
+    outer: for(i=0; i<100; i++) {
+        for(j=0; j<100; j++) {
+            let inputCopy = input.slice();
+            inputCopy[1] = i;
+            inputCopy[2] = j;
+            console.log(i + ", " + j);
+            console.log(evalOpCodes(inputCopy)[0]);
+            if (evalOpCodes(inputCopy)[0] === target) {
+                vals = {noun: i, verb: j};
+                break outer;
+            }
+        }
+    }
+    return vals;
+}
+
+let answer = findOutput(19690720, originalPuzzleInput); // {noun: 70, verb: 14}
+
+100 * answer.noun + answer.verb; // 7014
+
